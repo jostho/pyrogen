@@ -1,5 +1,7 @@
 # Pyrogen
 
+![CI](https://github.com/jostho/pyrogen/workflows/CI/badge.svg)
+
 This project has sources to run [firecracker](https://github.com/firecracker-microvm/firecracker) VMs on fedora.
 
 ## Environment
