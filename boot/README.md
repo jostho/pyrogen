@@ -4,7 +4,7 @@
 
 This directory holds the files required for boot. The files are added in the `.gitignore` list.
 
-Create custom rootfs and kernel image files and copy to this directory.
+Create kernel and rootfs image files and copy to this directory.
 See [here](https://github.com/firecracker-microvm/firecracker/blob/master/docs/rootfs-and-kernel-setup.md) for details.
 
 e.g. `ls` output from my machine
@@ -58,3 +58,17 @@ cd ~/src/linux-5.4.99 && make vmlinux
 ```
 
 Copy `vmlinux` file to the `boot/` directory.
+
+## Rootfs
+
+### CentOS 8
+
+Build centos 8 rootfs file from `CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.qcow2`
+
+### Ubuntu 18.04
+
+Build ubuntu 18.04 rootfs file from `bionic-server-cloudimg-amd64-root.tar.xz`
+
+### Ubuntu 20.04
+
+Build ubuntu 20.04 rootfs file from `focal-server-cloudimg-amd64-root.tar.xz`
