@@ -7,27 +7,31 @@ ALL_VM="centos-8 ubuntu-18 ubuntu-20"
 fc_vm_start() {
   for vm in $ALL_VM
   do
-    nohup firecracker --no-api --config-file config-${vm}.json > nohup-${vm}.out &
+    nohup firecracker --no-api --config-file "config-${vm}.json" > "nohup-${vm}.out" &
   done
 }
 
 fc_vm_stop() {
-  FC_PIDS=$(ps --no-headers -o pid -C firecracker)
-  if [ $? -eq 0 ]
+  if ps --no-headers -o pid -C firecracker > /dev/null
   then
-    kill $FC_PIDS
+    fc_pids=$(ps --no-headers -o pid -C firecracker | xargs)
+    echo "Killing pids: $fc_pids"
+    pkill -U "$USER" firecracker
   fi
 }
 
 fc_vm_status() {
-  ps -ww -o pid,ppid,uid,rss,etime,args -C firecracker
+  if ps --no-headers -o pid -C firecracker > /dev/null
+  then
+    ps -ww -o pid,ppid,uid,rss,etime,args -C firecracker
+  fi
 }
 
 fc_vm_check() {
   exit_code=0
   for vm in $ALL_VM
   do
-    if [ ! -f ./boot/${vm}-rootfs.ext4 ]
+    if [ ! -f "./boot/${vm}-rootfs.ext4" ]
     then
       echo "${vm}-rootfs.ext4 does not exist"
       exit_code=1
@@ -51,7 +55,7 @@ case "$1" in
     fc_vm_check
     ;;
   *)
-    echo "Usage: $(basename $0) {start|stop|status|check}"
+    echo "Usage: $(basename "$0") {start|stop|status|check}"
     exit 2
     ;;
 esac

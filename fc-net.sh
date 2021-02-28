@@ -5,7 +5,7 @@
 
 if [ "$EUID" -ne 0 ]
 then
-  echo "Please run $(basename $0) as root"
+  echo "Please run $(basename "$0") as root"
   exit 1
 fi
 
@@ -36,7 +36,7 @@ fc_net_start() {
     iptables -t filter -A FORWARD -i $tap_device -o $EGRESS_DEVICE -j ACCEPT
     ip addr show $tap_device
     # increment by 16, since it is a /28 network
-    let last_octet=${last_octet}+16
+    (( last_octet=last_octet+16 ))
   done
 }
 
@@ -66,7 +66,7 @@ case "$1" in
     fc_net_stop
     ;;
   *)
-    echo "Usage: $(basename $0) {start|stop}"
+    echo "Usage: $(basename "$0") {start|stop}"
     exit 2
     ;;
 esac
