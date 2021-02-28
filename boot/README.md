@@ -2,7 +2,7 @@
 
 ## Directory
 
-This directory holds the files required for boot.
+This directory holds the files required for boot. The files are added in the `.gitignore` list.
 
 Create custom rootfs and kernel image files and copy to this directory.
 See [here](https://github.com/firecracker-microvm/firecracker/blob/master/docs/rootfs-and-kernel-setup.md) for details.
@@ -20,7 +20,7 @@ total 3.9G
 
 ## Kernel
 
-Build kernel on a centos 8 stream box and copy the `vmlinux` file here.
+Build kernel on a CentOS Stream box
 
 ```bash
 sudo dnf install -y make gcc flex bison elfutils-libelf-devel openssl-devel perl
@@ -48,7 +48,7 @@ Prepare kernel sources for build
 
 ```bash
 tar xf ./linux-5.4.99.tar.xz
-cp ./config-amd64-5.4.43 ~/src/linux-5.4.99/.config
+cp ./config-amd64-5.4.43 ./linux-5.4.99/.config
 ```
 
 Build the kernel
@@ -56,3 +56,5 @@ Build the kernel
 ```bash
 cd ~/src/linux-5.4.99 && make vmlinux
 ```
+
+Copy `vmlinux` file to the `boot/` directory.
