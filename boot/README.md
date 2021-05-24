@@ -62,8 +62,8 @@ Copy `vmlinux` file to the `boot/` directory.
 
 ### Ubuntu 18.04
 
-Build ubuntu 18.04 rootfs file from `bionic-server-cloudimg-amd64-root.tar.xz`
+Build ubuntu 18.04 rootfs file from `bionic-server-cloudimg-amd64-root.tar.xz` available [here](http://cloud-images.ubuntu.com/bionic/current/)
 
 ### Ubuntu 20.04
 
-Build ubuntu 20.04 rootfs file from `focal-server-cloudimg-amd64-root.tar.xz`
+Build ubuntu 20.04 rootfs file from `focal-server-cloudimg-amd64-root.tar.xz` available [here](http://cloud-images.ubuntu.com/focal/current/)
