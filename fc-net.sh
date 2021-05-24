@@ -22,8 +22,8 @@ fc_net_start() {
   iptables -t nat -A POSTROUTING -o $EGRESS_DEVICE -j MASQUERADE
   iptables -t filter -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
-  last_octet=1
-  for tnum in 08 18 20
+  last_octet=17
+  for tnum in 18 20
   do
     tap_device=tap${tnum}
     ip link del $tap_device 2> /dev/null
@@ -51,7 +51,7 @@ fc_net_stop() {
   iptables -F
 
   # delete tap devices
-  for tnum in 08 18 20
+  for tnum in 18 20
   do
     ip link del tap${tnum}
   done

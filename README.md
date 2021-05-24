@@ -6,7 +6,7 @@ This project has sources to run [firecracker](https://github.com/firecracker-mic
 
 ## Environment
 
-* fedora 33
+* fedora 34
 * firecracker 0.24
 
 ## Setup
