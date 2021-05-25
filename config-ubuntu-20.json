@@ -1,7 +1,7 @@
 {
   "boot-source": {
     "kernel_image_path": "./boot/vmlinux",
-    "boot_args": "console=ttyS0 reboot=k panic=1 pci=off quiet selinux=0 apparmor=0 ipv6.disable=1 random.trust_cpu=on ip=172.28.28.34::172.28.28.33:255.255.255.240::eth0:off"
+    "boot_args": "console=ttyS0 reboot=k panic=1 pci=off quiet apparmor=0 ipv6.disable=1 random.trust_cpu=on ip=172.28.28.34::172.28.28.33:255.255.255.240::eth0:off"
   },
   "drives": [
     {

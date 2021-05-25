@@ -3,6 +3,8 @@
 # control firecracker networking
 # run as root
 
+ALL_TNUM="18 20"
+
 if [ "$EUID" -ne 0 ]
 then
   echo "Please run $(basename "$0") as root"
@@ -23,7 +25,7 @@ fc_net_start() {
   iptables -t filter -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
   last_octet=17
-  for tnum in 18 20
+  for tnum in $ALL_TNUM
   do
     tap_device=tap${tnum}
     ip link del $tap_device 2> /dev/null
@@ -51,7 +53,7 @@ fc_net_stop() {
   iptables -F
 
   # delete tap devices
-  for tnum in 18 20
+  for tnum in $ALL_TNUM
   do
     ip link del tap${tnum}
   done
