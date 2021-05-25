@@ -20,9 +20,10 @@ fc_net_start() {
   EGRESS_DEVICE=$(ip -o -4 route show to default | awk '{print $5}')
 
   # iptables for routing tuntap traffic
-  iptables -t nat -A POSTROUTING -o $EGRESS_DEVICE -j MASQUERADE
+  iptables -t nat -A POSTROUTING -o "$EGRESS_DEVICE" -j MASQUERADE
   iptables -t filter -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
+  # NOTE - this should match the values in config json
   last_octet=17
   for tnum in 18 20
   do
@@ -34,7 +35,7 @@ fc_net_start() {
     ip addr add 172.28.28.${last_octet}/28 dev $tap_device
     ip link set address 42:fc:c0:de:${tnum}:01 dev $tap_device
     ip link set $tap_device up
-    iptables -t filter -A FORWARD -i $tap_device -o $EGRESS_DEVICE -j ACCEPT
+    iptables -t filter -A FORWARD -i $tap_device -o "$EGRESS_DEVICE" -j ACCEPT
     ip addr show $tap_device
     # increment by 16, since it is a /28 network
     (( last_octet=last_octet+16 ))
