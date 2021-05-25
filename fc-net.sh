@@ -3,8 +3,6 @@
 # control firecracker networking
 # run as root
 
-ALL_TNUM="18 20"
-
 if [ "$EUID" -ne 0 ]
 then
   echo "Please run $(basename "$0") as root"
@@ -18,14 +16,15 @@ fc_net_start() {
   # setup ip forwarding
   sysctl -w net.ipv4.ip_forward=1
 
-  EGRESS_DEVICE=wlp5s0
+  # find egress device
+  EGRESS_DEVICE=$(ip -o -4 route show to default | awk '{print $5}')
 
   # iptables for routing tuntap traffic
   iptables -t nat -A POSTROUTING -o $EGRESS_DEVICE -j MASQUERADE
   iptables -t filter -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
   last_octet=17
-  for tnum in $ALL_TNUM
+  for tnum in 18 20
   do
     tap_device=tap${tnum}
     ip link del $tap_device 2> /dev/null
@@ -53,9 +52,9 @@ fc_net_stop() {
   iptables -F
 
   # delete tap devices
-  for tnum in $ALL_TNUM
+  for tnum in 18 20
   do
-    ip link del tap${tnum}
+    ip link del tap${tnum} 2> /dev/null
   done
 }
 
