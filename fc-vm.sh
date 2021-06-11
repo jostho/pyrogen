@@ -2,7 +2,7 @@
 
 # control firecracker VM processes
 
-ALL_VM="ubuntu-18 ubuntu-20"
+ALL_VM="debian-10 ubuntu-18 ubuntu-20"
 
 fc_vm_start() {
   for vm in $ALL_VM

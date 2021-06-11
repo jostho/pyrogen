@@ -24,8 +24,8 @@ fc_net_start() {
   iptables -t filter -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
   # NOTE - this should match the values in config json
-  last_octet=17
-  for tnum in 18 20
+  last_octet=1
+  for tnum in 10 18 20
   do
     tap_device=tap${tnum}
     ip link del $tap_device 2> /dev/null
@@ -53,7 +53,7 @@ fc_net_stop() {
   iptables -F
 
   # delete tap devices
-  for tnum in 18 20
+  for tnum in 10 18 20
   do
     ip link del tap${tnum} 2> /dev/null
   done
