@@ -6,8 +6,8 @@ This project has sources to run [firecracker](https://github.com/firecracker-mic
 
 ## Environment
 
-* fedora 34
-* firecracker 0.24
+* fedora 36
+* firecracker 1.1
 
 ## Setup
 
@@ -29,11 +29,11 @@ sudo ./fc-net.sh start
 Start VMs
 
 ```bash
-fc-vm.sh start
+./fc-vm.sh start
 ```
 
 Check status of VMs
 
 ```bash
-fc-vm.sh status
+./fc-vm.sh status
 ```
