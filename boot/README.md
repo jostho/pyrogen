@@ -12,7 +12,8 @@ e.g. `ls` output from my machine
 ```bash
 $ ls -lh boot/
 total 2.1G
--rw-r--r--. 1 jose jose 1.7K Jul  7 12:09 README.md
+-rw-r--r--. 1 jose jose 1.4K Jul  7 14:49 Makefile
+-rw-r--r--. 1 jose jose 1.1K Jul  7 15:16 README.md
 -rw-r--r--. 1 jose jose 1.2G Jul  7 12:12 ubuntu-20-rootfs.ext4
 -rw-r--r--. 1 jose jose 1.2G Jul  7 12:12 ubuntu-22-rootfs.ext4
 -rwxr-xr-x. 1 jose jose  42M Jul  7 11:13 vmlinux
@@ -20,41 +21,10 @@ total 2.1G
 
 ## Kernel
 
-Build kernel on a `Ubuntu 22.04` host
+Build kernel on a `Ubuntu 22.04` host using the `Makefile`
 
 ```bash
-sudo apt-get -y -qq install make gcc flex bison libelf-dev libssl-dev bc
-```
-
-Prepare a working directory
-
-```bash
-mkdir -p ~/src && cd ~/src
-```
-
-Get kernel sources
-
-```bash
-curl -LO https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.10.128.tar.xz
-```
-
-Get config file from [ignite](https://github.com/weaveworks/ignite) project
-
-```bash
-curl -O https://raw.githubusercontent.com/weaveworks/ignite/main/images/kernel/versioned/config-amd64-5.10.77
-```
-
-Prepare kernel sources for build
-
-```bash
-tar xf ./linux-5.10.128.tar.xz
-cp ./config-amd64-5.10.77 ./linux-5.10.128/.config
-```
-
-Build the kernel
-
-```bash
-cd ~/src/linux-5.10.128 && make vmlinux
+make vmlinux
 ```
 
 Copy `vmlinux` file from `Ubuntu 22.04` host to the `boot/` directory.
