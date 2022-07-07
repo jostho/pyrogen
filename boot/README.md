@@ -20,7 +20,7 @@ total 2.1G
 
 ## Kernel
 
-Build kernel on a `Ubuntu 22.04` box
+Build kernel on a `Ubuntu 22.04` host
 
 ```bash
 sudo apt-get -y -qq install make gcc flex bison libelf-dev libssl-dev bc
@@ -41,7 +41,7 @@ curl -LO https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.10.128.tar.xz
 Get config file from [ignite](https://github.com/weaveworks/ignite) project
 
 ```bash
-curl -O https://raw.githubusercontent.com/weaveworks/ignite/main/images/kernel/generated/config-amd64-5.10.77
+curl -O https://raw.githubusercontent.com/weaveworks/ignite/main/images/kernel/versioned/config-amd64-5.10.77
 ```
 
 Prepare kernel sources for build
@@ -57,7 +57,7 @@ Build the kernel
 cd ~/src/linux-5.10.128 && make vmlinux
 ```
 
-Copy `vmlinux` file to the `boot/` directory.
+Copy `vmlinux` file from `Ubuntu 22.04` host to the `boot/` directory.
 
 ## Rootfs
 
