@@ -4,7 +4,7 @@
 
 This directory holds the files required for boot. The files are added in the `.gitignore` list.
 
-Create kernel and rootfs image files and copy to this directory.
+Build kernel and rootfs image files and copy to this directory.
 See [here](https://github.com/firecracker-microvm/firecracker/blob/master/docs/rootfs-and-kernel-setup.md) for details.
 
 e.g. `ls` output from my machine

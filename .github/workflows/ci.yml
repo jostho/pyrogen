@@ -9,13 +9,21 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run shellcheck
         run: shellcheck *.sh
+
+  vmlinux:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Build vmlinux
         run: make vmlinux
         working-directory: ./boot
