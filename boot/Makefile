@@ -21,9 +21,9 @@ init:
 
 prep: init
 	mkdir -p $(WORK_DIR)
-	test -f $(KERNEL_LOCAL_ARCHIVE) || $(CURL) -m 60 -L -o $(KERNEL_LOCAL_ARCHIVE) $(KERNEL_URL)
+	test -f $(KERNEL_LOCAL_ARCHIVE) || $(CURL) -sS -m 60 -o $(KERNEL_LOCAL_ARCHIVE) $(KERNEL_URL)
 	test -d $(WORK_DIR)/linux-$(KERNEL_VERSION) || tar xf $(KERNEL_LOCAL_ARCHIVE) -C $(WORK_DIR)
-	test -f $(KCONFIG_LOCAL_FILE) || $(CURL) -m 60 -L -o $(KCONFIG_LOCAL_FILE) $(KCONFIG_URL)
+	test -f $(KCONFIG_LOCAL_FILE) || $(CURL) -sS -m 60 -o $(KCONFIG_LOCAL_FILE) $(KCONFIG_URL)
 
 vmlinux: prep
 	echo "# pyrogen config" >> $(KCONFIG_LOCAL_FILE)
