@@ -1,3 +1,4 @@
+# run on Ubuntu 22.04
 CURL := curl
 
 WORK_DIR := /tmp/pyrogen
@@ -5,7 +6,7 @@ KERNEL_VERSION := 5.10.128
 KCONFIG_VERSION := 5.10.77
 
 KERNEL_URL := https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$(KERNEL_VERSION).tar.xz
-KERNEL_LOCAL_ARCHIVE := $(WORK_DIR)/linux-$(KERNEL_VERSION).tar.xz
+KERNEL_LOCAL_FILE := $(WORK_DIR)/linux-$(KERNEL_VERSION).tar.xz
 
 KCONFIG_URL := https://raw.githubusercontent.com/weaveworks/ignite/main/images/kernel/versioned/config-amd64-$(KCONFIG_VERSION)
 KCONFIG_LOCAL_FILE := $(WORK_DIR)/config-$(KCONFIG_VERSION)
@@ -21,8 +22,8 @@ init:
 
 prep: init
 	mkdir -p $(WORK_DIR)
-	test -f $(KERNEL_LOCAL_ARCHIVE) || $(CURL) -sS -m 60 -o $(KERNEL_LOCAL_ARCHIVE) $(KERNEL_URL)
-	test -d $(WORK_DIR)/linux-$(KERNEL_VERSION) || tar xf $(KERNEL_LOCAL_ARCHIVE) -C $(WORK_DIR)
+	test -f $(KERNEL_LOCAL_FILE) || $(CURL) -sS -m 60 -o $(KERNEL_LOCAL_FILE) $(KERNEL_URL)
+	test -d $(WORK_DIR)/linux-$(KERNEL_VERSION) || tar xf $(KERNEL_LOCAL_FILE) -C $(WORK_DIR)
 	test -f $(KCONFIG_LOCAL_FILE) || $(CURL) -sS -m 60 -o $(KCONFIG_LOCAL_FILE) $(KCONFIG_URL)
 
 vmlinux: prep
